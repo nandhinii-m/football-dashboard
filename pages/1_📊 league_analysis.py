@@ -5,7 +5,7 @@ from utils import load_data  # Standard, clean import!
 df = load_data()
 
 st.title("📊 League Analysis")
-st.write("Explore statistics from Europe's Top Five leagues.")
+st.write("Explore statistics from Europe's top five leagues.")
 st.divider()
 
 league = st.selectbox(
