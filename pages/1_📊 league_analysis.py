@@ -1,8 +1,14 @@
 import streamlit as st
 import plotly.express as px
-from utils import load_data  # Standard, clean import!
+from utils import load_data
 
 df = load_data()
+
+def bar_chart(data, x_col, y_col, title):
+    fig = px.bar(data, x=x_col, y=y_col, title=title)
+    fig.update_xaxes(title_text="", tickangle=-45, automargin=True)
+    fig.update_yaxes(title_text="")
+    st.plotly_chart(fig, use_container_width=True)
 
 st.title("📊 League Analysis")
 st.write("Explore statistics from Europe's top five leagues.")
@@ -21,103 +27,33 @@ if league:
     st.subheader(league)
 
     col1, col2, col3 = st.columns(3)
+    col1.metric("Players", len(filtered_df))
+    col2.metric("Clubs", filtered_df["Squad"].nunique())
+    col3.metric("Goals", int(filtered_df["Gls"].sum()))
 
-    with col1:
-        st.metric("Players", len(filtered_df))
+    st.divider()
 
-    with col2:
-        st.metric("Clubs", filtered_df["Squad"].nunique())
-
-    with col3:
-        st.metric("Goals", int(filtered_df["Gls"].sum()))
-
-
-# --------------------------------
-# Top Scorers
-# --------------------------------
+    # Top Scorers
 
     st.header("Top Scorers")
+    top_scorers = filtered_df.sort_values(by="Gls", ascending=False).head(10)
+    bar_chart(top_scorers, "Player", "Gls", "Top 10 Goal Scorers")
 
-    top_scorers = filtered_df.sort_values(
-        by="Gls",
-        ascending=False
-    ).head(10)
-
-    fig_scorers = px.bar(
-        top_scorers,
-        x="Player",
-        y="Gls",
-        title="Top 10 Goal Scorers"
-    )
-
-    fig_scorers.update_xaxes(
-        title_text="",
-        tickangle=-45,
-        automargin=True
-    )
-
-    fig_scorers.update_yaxes(title_text="")
-
-    st.plotly_chart(fig_scorers, use_container_width=True)
-
-# --------------------------------
-# Top Assists
-# --------------------------------
+    # Top Assists
 
     st.header("Top Assists")
+    top_assists = filtered_df.sort_values(by="Ast", ascending=False).head(10)
+    bar_chart(top_assists, "Player", "Ast", "Top 10 Assist Providers")
 
-    top_assists = filtered_df.sort_values(
-        by="Ast",
-        ascending=False
-    ).head(10)
-
-    fig_assists = px.bar(
-        top_assists,
-        x="Player",
-        y="Ast",
-        title="Top 10 Assist Providers"
-    )
-
-    fig_assists.update_xaxes(
-        title_text="",
-        tickangle=-45,
-        automargin=True
-    )
-
-    fig_assists.update_yaxes(title_text="")
-
-    st.plotly_chart(fig_assists, use_container_width=True)
-
-# --------------------------------
-# Club Goals
-# --------------------------------
+    # Club Goals
 
     st.header("Top Goal Scoring Clubs")
-
     club_goals = (
-        filtered_df
-        .groupby("Squad")["Gls"]
+        filtered_df.groupby("Squad")["Gls"]
         .sum()
         .sort_values(ascending=False)
         .head(10)
         .reset_index()
     )
-
-    fig_clubs = px.bar(
-        club_goals,
-        x="Squad",
-        y="Gls",
-        title="Top 10 Goal Scoring Clubs"
-    )
-
-    fig_clubs.update_xaxes(
-        title_text="",
-        tickangle=-45,
-        automargin=True
-    )
-
-    fig_clubs.update_yaxes(title_text="")
-
-    st.plotly_chart(fig_clubs, use_container_width=True)
-
+    bar_chart(club_goals, "Squad", "Gls", "Top 10 Goal Scoring Clubs")
 

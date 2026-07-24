@@ -11,13 +11,13 @@ st.title("⚽ Football Analytics Dashboard")
 
 st.divider()
 
-st.header("🏟️ Welcome")
+st.header("Welcome")
 
 st.write("""
 This dashboard allows you to analyze player and club statistics from the **2025–2026 season across Europe's Top Five Leagues**.
 """)
 
-st.header("🔍 Features")
+st.header("Features")
 
 st.markdown("""
 📊 **League Analysis** -
@@ -28,7 +28,7 @@ and highest scoring clubs in each league.
 Search any player and view detailed statistics
 tailored to their position.
 
-🕵 **Player Comparison** - 
+👥 **Player Comparison** - 
 Compare two players side by side and
 see who comes out on top.
 """)
