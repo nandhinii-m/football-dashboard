@@ -11,8 +11,6 @@ st.title("⚽ Football Analytics Dashboard")
 
 st.divider()
 
-st.header("Welcome")
-
 st.write("""
 This dashboard allows you to analyze player and club statistics from the **2025–2026 season across Europe's Top Five Leagues**.
 """)
