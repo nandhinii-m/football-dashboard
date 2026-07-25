@@ -16,7 +16,7 @@ A simple and interactive dashboard which lets you explore player and club stats 
 * Streamlit
 
 **Notes**
-1. This dashboard uses a lightweight data set which contains only stats. Advanced stats (like xA and xG)
+1. This dashboard uses a lightweight data set which contains only basic stats. Advanced stats (like xA and xG)
    might be added in the future.
 2. Player names with accented letters need to match original spelling while searching.
 
