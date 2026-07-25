@@ -1,5 +1,5 @@
 # Football Analytics Dashboard
-A simple and interactive website which lets you explore player and club stats (only covers 2025-26 club football stats)
+A simple and interactive dashboard which lets you explore player and club stats (only covers 2025-26 club football stats)
 
 **Live Demo** : https://footy-dashboard.streamlit.app/
 
